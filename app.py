@@ -72,10 +72,10 @@ def feedback():
     # 情報をデータベースに登録出来るように修正せよ。
     ############
     review = request.form['review']
-    isUser = True if request.form['feedback'] == "正しい" else False
-    isMachine = True if request.form['pred'] == "positive" else False
-    if isUser:
-        sqlite_entry(db, review, int(isMachine))
+    isJudgmentCorrect = True if request.form['feedback'] == "正しい" else False
+    isPositive = True if request.form['pred'] == "positive" else False
+    if isJudgmentCorrect:
+        sqlite_entry(db, review, int(isPositive))
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
