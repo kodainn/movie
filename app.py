@@ -74,7 +74,8 @@ def feedback():
     review = request.form['review']
     isUser = True if request.form['feedback'] == "正しい" else False
     isMachine = True if request.form['pred'] == "positive" else False
-    sqlite_entry(db, review, 1 if isUser and isMachine else 0)
+    if isUser:
+        sqlite_entry(db, review, 1 if isMachine else 0)
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
