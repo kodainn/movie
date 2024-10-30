@@ -74,8 +74,11 @@ def feedback():
     review = request.form['review']
     isJudgmentCorrect = True if request.form['feedback'] == "正しい" else False
     isPositive = True if request.form['pred'] == "positive" else False
-    if isJudgmentCorrect:
-        sqlite_entry(db, review, int(isPositive))
+    sentiment = isPositive
+    if not(isJudgmentCorrect):
+        sentiment = not(isPositive)
+        
+    sqlite_entry(db, review, int(sentiment))
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
